@@ -1,0 +1,533 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Normcore.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:Normal.Realtime.CodeBuilder">
+            <summary>
+            A CodeBuilder wraps the low-allocation StringBuilder with indentation semantics to simplify model generation.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.CodeBuilder.AppendLine(System.String)">
+            <summary>
+            Insert a line of code at the current indentation level.
+            </summary>s
+        </member>
+        <member name="M:Normal.Realtime.CodeBuilder.StartBlock(System.String)">
+            <summary>
+            Insert a line of code, then increase the indentation level.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.CodeBuilder.InterruptBlock(System.String)">
+            <summary>
+            Insert a line of code at the previous indentation level and then continue at the current indentation. Used
+            for block continuations like `else` or `catch` statements.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.CodeBuilder.CloseBlock(System.String)">
+            <summary>
+            Decrease the indentation level, then insert a line of code.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.CodeBuilder.ToString">
+            <summary>
+            Render the code to a string.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.GetUnqualifiedTypeName(System.Type)">
+            <summary>
+            Gets the unqualified generic type name. Generic types are qualified (List`1, List`2, etc) to distinguish
+            their implementations. During codegen, we want to use the unqualified type names.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.GetCleanTypeName(System.Type)">
+            <summary>
+            Gets a clean, parseable, aliased, namespaced type name.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.IsKeyword(System.String)">
+            <summary>
+            Returns true if a string is a reserved keyword.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.IsSupportedType(System.Type)">
+            <summary>
+            True if the type is supported by the Realtime model compiler.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.IsTypeAssignableRealtimeModel(System.Type)">
+            <summary>
+            True if the type can be assigned to RealtimeModel.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Codegen.CodeUtilities.IsTypeAnnotatedRealtimeModel(System.Type,System.Boolean)">
+            <summary>
+            True if the type is annotated with the RealtimeModel attribute.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeCallbackLayout.event">
+            <summary>
+            The type of model event being subscribed.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeCallbackLayout.isUnmanagedCallback">
+            <summary>
+            True if the callback can be subscribed once in the model constructor.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeModelLayout.name">
+            <summary>
+            The unqualified class name of the model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeModelLayout.namespace">
+            <summary>
+            The namespace of the model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeModelLayout.hasMetaModel">
+            <summary>
+            True if the model has a metamodel.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimeModelLayout.hasNamespace">
+            <summary>
+            True if the model class is part of a namespace.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimePropertyLayout.type">
+            <summary>
+            The underlying type of the property.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimePropertyLayout.propertyID">
+            <summary>
+            The property ID.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimePropertyLayout.isModel">
+            <summary>
+            True if the property type is a Realtime model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimePropertyLayout.isReliable">
+            <summary>
+            True if the property is reliable.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Codegen.RealtimePropertyLayout.isEventDispatcher">
+            <summary>
+            True if the property should dispatch a change event. This is always false on model properties, even if the
+            attribute metadata says otherwise.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponentEditor.IsComponentPlaying(Normal.Realtime.IRealtimeComponent)">
+            <summary>
+            True if the component is currently in a playing scene. Components on prefab assets are never playing.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponentEditor.DrawOwnershipSettings(Normal.Realtime.IRealtimeComponent)">
+            <summary>
+            Draw the owner of a component and buttons to request or clear ownership.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponentEditor.GetComponentOwnerString(Normal.Realtime.IRealtimeComponent)">
+            <summary>
+            Convert the owner ID of a component into a readable string.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.RecompileAllModels(System.Boolean)">
+            <summary>
+            Recompile all of the models in the project.
+            </summary>
+            <param name="prompt">If true, this will display a warning.</param>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.TryGenerateModel(UnityEditor.MonoScript)">
+            <summary>
+            Generate and save the Realtime model for a MonoScript. The main class in the MonoScript should be tagged
+            with a RealtimeModelAttribute. The generated model will be saved into the same file.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.TryClearGeneratedModel(UnityEditor.MonoScript)">
+            <summary>
+            Clear a generated Realtime model for a MonoScript.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.AddNamespaceIfNeeded(System.String,System.String@)">
+            <summary>
+            Add a namespace to the script if the namespace is missing.
+            </summary>
+            <param name="nspace">The namespace.</param>
+            <param name="scriptText">The script text to modify.</param>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyName(Normal.Realtime.Codegen.RealtimePropertyLayout,System.Boolean)">
+            <summary>
+            Returns the public name of the property without any leading underscores. Optionally capitalized.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyMemberName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the property class member. In Normcore 3 when we remove backing fields, this will be the
+            same as PropertyBackingFieldName.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyTypeName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the property type.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyWrapperTypeName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the property wrapper type.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyBackingFieldName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the user-declared field used to generate the property.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyEventMethodName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the property change event method (which safely invokes the delegate).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.PropertyEventDelegateName(Normal.Realtime.Codegen.RealtimePropertyLayout)">
+            <summary>
+            Returns the name of the property change event delegate.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.CallbackMethodName(Normal.Realtime.Codegen.RealtimeCallbackLayout)">
+            <summary>
+            Returns the name of the method to pass to the superclass. If this callback takes arguments, the
+            parameterless name is used to wrap the parameterized method so it can be passed to the superclass.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.CallbackUserMethodName(Normal.Realtime.Codegen.RealtimeCallbackLayout)">
+            <summary>
+            Returns the name of the user-defined method that will receive the callback.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModelCompiler.CallbackEventName(Normal.Realtime.Codegen.RealtimeCallbackLayout)">
+            <summary>
+            The namespaced event name.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeViewEditor.showAdvancedSettings">
+            <summary>
+            Show advanced view settings. This is static so that all view editors share the same preference.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeViewEditor.target">
+            <summary>
+            The editor target as a RealtimeView.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeViewEditor.ResetViewUUID">
+            <summary>
+            Reset the view UUID with a confirmation warning.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreAppSettingsEditor.FindNormcoreAppKey(UnityEditor.SerializedObject)">
+            <summary>
+            Find the app key property on a serialized NormcoreAppSettings object.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreAppSettingsEditor.FindMatcherURL(UnityEditor.SerializedObject)">
+            <summary>
+            Get the matcher URL property on a serialized NormcoreAppSettings object.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreAppSettingsEditor.IsCustomMatcherURL(System.String)">
+            <summary>
+            True if the matcher URL value is custom.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreAppSettingsEditor.DrawResettableMatcherURLField(UnityEngine.Rect,UnityEditor.SerializedProperty)">
+            <summary>
+            Draw the matcher URL field with a small reset button next to it.
+            </summary>
+            <returns>True if the reset button was pressed.</returns>
+        </member>
+        <member name="T:Normal.Internal.DirectoryFinder">
+            <summary>
+            The DirectoryFinder helps the Normcore UPM package find the Normal folder within the asset database. When
+            someone installs Normcore using the unitypackage, one of the assets is a DirectoryFinder in a resource folder.
+            Once the UPM package is installed, we use AssetDatabaseUtilities.FindAssetPaths&lt;DirectoryFinder&gt;() to look up
+            the Normal installation folder.
+            </summary>
+        </member>
+        <member name="F:Normal.GUIDMigrator.__sourceGUIDToCompiledGUIDMap">
+            <summary>
+            The map of assets that need to be migrated to the compiled project.
+            </summary>
+        </member>
+        <member name="T:Normal.GUIDMigrator.MigrationEntry">
+            <summary>
+            Encapsulate a GUID migration.
+            </summary>
+        </member>
+        <member name="T:Normal.GUIDMigrator.AssetModification">
+            <summary>
+            Encapsulate a file modification.
+            </summary>
+        </member>
+        <member name="M:Normal.GUIDMigrator.Migrate">
+            <summary>
+            Migrate the asset database from Normcore 1 (source) GUIDs to Normcore 2 (compiled) GUIDs.
+            </summary>
+        </member>
+        <member name="M:Normal.GUIDMigrator.AssetNeedsMigration(System.String)">
+            <summary>
+            Returns true if the asset data contains any GUIDs that need to be migrated.
+            </summary>
+        </member>
+        <member name="M:Normal.GUIDMigrator.MigrateAsset(System.String,System.Collections.Generic.ICollection{Normal.GUIDMigrator.AssetModification})">
+            <summary>
+            Migrate a particular asset from source GUIDs to compiled GUIDs. If the asset was migrated, the file
+            modifications are not written to disk but are added to the list of modifications.
+            </summary>
+        </member>
+        <member name="M:Normal.GUIDMigrator.WriteAssetModification(Normal.GUIDMigrator.AssetModification)">
+            <summary>
+            Write an asset modification to disk.
+            </summary>
+        </member>
+        <member name="M:Normal.GUIDMigrator.TryMigrateGUID(Normal.GUIDMigrator.MigrationEntry,System.String@)">
+            <summary>
+            Try to replace a source file GUID with the rectified compiled GUID. If the source GUID is found, the data
+            reference is updated to contain the compiled GUID.
+            </summary>
+            <returns>True if the source GUID was found and replaced in the file data.</returns>
+        </member>
+        <member name="M:Normal.PluginMigration.DisplayMigrationDialog(System.String,System.String,System.String)">
+            <summary>
+            Display a quick popup dialog about Normcore Migration.
+            </summary>
+        </member>
+        <member name="M:Normal.PluginMigration.InferMigrationVersion">
+            <summary>
+            Try to detect the most recent version of Normcore that was installed in this project.
+            </summary>
+        </member>
+        <member name="M:Normal.PluginMigration.CollectMigrationTasks">
+            <summary>
+            Query the migration modules and collect a list of migration tasks that we need to perform.
+            </summary>
+        </member>
+        <member name="P:Normal.PluginMigration.isMigrationInProgress">
+            <summary>
+            True if there is a migration task currently in progress.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditor.PackagePrefKey(System.String)">
+            <summary>
+            Namespace an EditorPref key with our package name.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditor.ProjectPrefKey(System.String)">
+            <summary>
+            Namespace an EditorPref key with our package name and our custom project GUID.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditor.OverwriteScriptCompilationPreference">
+            <summary>
+            Overwrite the script compilation prefs with Recompile After Finished Playing. We don't support
+            Recompile And Continue Playing because it could break serialization with another client.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditor.AddNormcoreScriptingDefine">
+            <summary>
+            Add NORMCORE to the build target's scripting define symbols if it is missing. We do this so that the
+            package installer can be imported into a fresh project. The examples are conditionally compiled so that
+            the package installer can run before the package has been added.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditor.AddNormcoreProjectConfig">
+            <summary>
+            Create the Normcore project settings (if missing), and the default app settings.
+            </summary>
+        </member>
+        <member name="P:Normal.NormcoreEditorResources.icon">
+            <summary>
+            The minimal 32x32 Normal icon.
+            </summary>
+        </member>
+        <member name="P:Normal.NormcoreEditorResources.normalLogo">
+            <summary>
+            The large Normal logo with baked padding.
+            </summary>
+        </member>
+        <member name="P:Normal.NormcoreEditorResources.normcoreLogo">
+            <summary>
+            The large Normcore logo with baked padding.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreEditorResources.GetPackagePath(System.String)">
+            <summary>
+            Convert a package path to an AssetDatabase path. For example, "Editor/Resources/Image.png" is converted
+            to "Packages/com.normalvr.normcore/Editor/Resources/Image.png".
+            </summary>
+        </member>
+        <member name="T:Normal.NormcoreEditorResources.PackageAsset`1">
+            <summary>
+            A lazily loaded package asset.
+            </summary>
+        </member>
+        <member name="P:Normal.NormcoreEditorResources.PackageAsset`1.resource">
+            <summary>
+            Get or load the resource.
+            </summary>
+        </member>
+        <member name="P:Normal.PackageVersionCheck.suppressVersionPrompt">
+            <summary>
+            True if the user has previously chosen to "never ask again" for new versions.
+            </summary>
+        </member>
+        <member name="P:Normal.PackageVersionCheck.lastPromptedVersion">
+            <summary>
+            The last package version we prompted the user about an update.
+            </summary>
+        </member>
+        <member name="T:Normal.Utility.AssetDatabaseUtilities">
+            <summary>
+            Utilities related to the AssetDatabase and the Normcore files inside it. This is a conditionally compiled
+            class in the runtime assembly so that ScriptableSingletons in the runtime assembly can use it.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.GetNormalPath(System.String)">
+            <summary>
+            Get the Normal installation directory in the Assets folder. This is distinct from the plugin package and
+            is where Normcore project settings should be stored. The path is relative to the project folder.
+            </summary>
+            <param name="subdir">An optional subdirectory to combine with the Normal directory.</param>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.FindNormalDirectory">
+            <summary>
+            Find the Normal installation directory in the Assets directory.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.FindAssetGUIDs``1">
+            <summary>
+            Find assets in the asset database by type, returning a list of asset GUIDs.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.FindAssetPaths``1">
+            <summary>
+            Find assets in the asset database by type, returning a list of asset paths.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.Exists(System.String)">
+            <summary>
+            Returns true if an asset exists at a project path.
+            </summary>
+            <param name="path">A path relative to the project folder.</param>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.AbsoluteProjectPath(System.String)">
+            <summary>
+            Convert a relative project path (starts with "Assets") into an absolute system path.
+            </summary>
+            <param name="path">A path relative to the project folder.</param>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.CreateFolderRecursive(System.String)">
+            <summary>
+            Create all of the folders required for a given project path using AssetDatabase.Create
+            </summary>
+            <param name="path">A path relative to the project folder.</param>
+        </member>
+        <member name="M:Normal.Utility.AssetDatabaseUtilities.CreateMissingAsset``1(System.String,``0@)">
+            <summary>
+            Create an asset of type T if there are none in the project.
+            </summary>
+            <param name="path">The path to create the instance.</param>
+            <param name="instance">The newly created instance, or null if one wasn't created.</param>
+            <typeparam name="T">The ScriptableObject type to instantiate.</typeparam>
+            <returns>True if a new instance was created.</returns>
+        </member>
+        <member name="M:Normal.Utility.AssetSingleton`1.GetInstance(Normal.Utility.AssetSingleton{`0}.PreferredFilepathDelegate)">
+            <summary>
+            Load or create the instance if none exists, then return it.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.AssetSingleton`1.tname">
+            <summary>
+            The settings type name.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetSingleton`1.LoadInstance">
+            <summary>
+            Attempt to load an existing instance.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.AssetSingleton`1.CreateInstance(Normal.Utility.AssetSingleton{`0}.PreferredFilepathDelegate)">
+            <summary>
+            Attempt to create a new instance.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.InternalSettings.migration">
+            <summary>
+            The migration data saved by the project.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.InternalSettings.projectGUID">
+            <summary>
+            The Normcore project GUID used to store per-project user settings.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.HSlice(UnityEngine.Rect,System.Single,System.Single)">
+            <summary>
+            Returns a horizontal slice of a Rect with min and max coordinates relative to the Rect.
+            </summary>
+            <param name="rect">The rect to slice.</param>
+            <param name="min">The xMin, relative to the rect.</param>
+            <param name="max">The xMax, relative to the rect.</param>
+            <returns>A new Rect that is a slice of the original Rect.</returns>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.VSlice(UnityEngine.Rect,System.Single,System.Single)">
+            <summary>
+            Returns a vertical slice of a Rect with min and max coordinates relative to the Rect.
+            </summary>
+            <param name="rect">The rect to slice.</param>
+            <param name="min">The yMin, relative to the rect.</param>
+            <param name="max">The yMax, relative to the rect.</param>
+            <returns>A new Rect that is a slice of the original Rect.</returns>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.OffsetSingleLine(UnityEngine.Rect,System.Int32,System.Single)">
+            <summary>
+            Returns a single line inside a Rect.
+            </summary>
+            <param name="rect"></param>
+            <param name="line"></param>
+            <param name="height"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.Inset(UnityEngine.Rect,System.Single)">
+            <summary>
+            Inset a rect from all four sides by a single value.
+            </summary>
+            <param name="rect">The Rect to inset.</param>
+            <param name="value">The inset on all four sides.</param>
+            <returns>A new Rect that is inset from the original rect.</returns>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.Inset(UnityEngine.Rect,System.Single,System.Single)">
+            <summary>
+            Inset a rect from all four sides by vertical and horizontal values.
+            </summary>
+            <param name="rect">The Rect to inset.</param>
+            <param name="vertical">The top and bottom inset.</param>
+            <param name="horizontal">The left and right inset.</param>
+            <returns>A new Rect that is inset from the original rect.</returns>
+        </member>
+        <member name="M:Normal.Utility.NormcoreEditorExtensions.Inset(UnityEngine.Rect,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Inset a rect from all four sides by different values.
+            </summary>
+            <param name="rect">The Rect to inset.</param>
+            <param name="top">The top inset.</param>
+            <param name="bottom">The bottom inset.</param>
+            <param name="left">The left inset.</param>
+            <param name="right">The right inset.</param>
+            <returns>A new Rect that is inset from the original rect.</returns>
+        </member>
+    </members>
+</doc>

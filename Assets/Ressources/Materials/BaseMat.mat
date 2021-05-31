@@ -8,14 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BaseMat
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a84e7ea9fbe105e4aa4731a9316aa774, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -64,6 +63,34 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_18fc7836d45443879dcca2d1c162826f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 76fba8440aa09b54985389a70b02dddc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_3fadda05375f4004be1cf0cb39b36081_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 15a7bfb34c55afa489a68fe2ee69ef40, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_442514f8bb8449208b54eaadcd88696c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 395d91c43a8608548a43b8e0ad53280e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_77c7c0dee8af484983f4227dd1c36c9d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 5e9a2546cef1f8341b68d7e159e4fb4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_dc2fe02c06954bc5969baf8a36f689ef_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6292ab4a952dc8e47b73f6b81644c90d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_dfde9d202b6849808a568c837d12eab1_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4742fa8b745c03641bf159941a2fee21, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_f4664fe101c44e0cb588332eecfb6345_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -77,6 +104,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_746881bfe89b4363a621db7daf71dd74: 0.95
+    - Vector1_bdca22cbc57140479c1bd4c2d5af5c49: 0.46
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -104,12 +133,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Vector4_c2fbae9772ab4c48b31facd6380d70d9: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &695165354353907465
+--- !u!114 &7800762201373554389
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

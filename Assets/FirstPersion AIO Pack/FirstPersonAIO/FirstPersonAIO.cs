@@ -718,6 +718,11 @@ public class FirstPersonAIO : MonoBehaviour {
         #endregion
     }
 
+    public void DisableHeadbob()
+    {
+        useHeadbob = !useHeadbob;
+    }
+
  
 
     public IEnumerator CameraShake(float Duration, float Magnitude){

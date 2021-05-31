@@ -1,0 +1,2180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Normcore</name>
+    </assembly>
+    <members>
+        <member name="T:Normal.Realtime.IConfigurableComponent">
+            <summary>
+            The internal IConfigurableComponent interface lets us inject the necessary dependencies with minimal type
+            information, while hiding the dependency injection API from public users. The interface members are explicitly
+            defined on the components so they don't have to be public; they are only accessible when the components are
+            cast to IConfigurableComponent.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.IRealtimeComponent">
+            <summary>
+            An object that represents a RealtimeComponent. Typically this is a RealtimeView or anything that subclasses RealtimeComponent&lt;TModel&gt;.
+            </summary>
+            <remarks>This interface should not be implemented directly. Subclass RealtimeComponent&lt;TModel&gt; instead.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.realtimeView">
+            <summary>
+            The RealtimeView that owns this component. Accessing this property before Start is unreliable.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.realtime">
+            <summary>
+            The Realtime instance that is managing this component. On prefab views, this property is available after
+            Awake. On scene views or their children, this is not available until Start.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.room">
+            <summary>
+            The current room of the Realtime instance that is managing this component. This might be null if
+            the Realtime instance hasn't connected yet. Accessing this property before Start is unreliable.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.ownerIDSelf">
+            <summary>
+            The client ID of the component owner.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.ownerIDInHierarchy">
+            <summary>
+            The client ID of the component's hierarchy owner (the root owner of the component).
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isUnownedSelf">
+            <summary>
+            True if the component is not owned by any client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isUnownedInHierarchy">
+            <summary>
+            True if the component and all of its parent views are not owned by any client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isOwnedLocallySelf">
+            <summary>
+            True if the component is owned by the local client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isOwnedLocallyInHierarchy">
+            <summary>
+            True if the component and all of its parent views are owned by the local client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isOwnedRemotelySelf">
+            <summary>
+            True if the component is owned by a remote client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IRealtimeComponent.isOwnedRemotelyInHierarchy">
+            <summary>
+            True if this component and all of its parent views are owned by a remote client.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeComponent.RequestOwnership">
+            <summary>
+            Request ownership of the component, if it is unowned.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeComponent.SetOwnership(System.Int32)">
+            <summary>
+            Set ownership of the component, if it is unowned.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeComponent.ClearOwnership">
+            <summary>
+            Clear ownership of the component, if it is owned by the local client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent.realtimeView">
+            <inheritdoc cref="P:Normal.Realtime.IRealtimeComponent.realtimeView"/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent.realtime">
+            <inheritdoc cref="P:Normal.Realtime.IRealtimeComponent.realtime"/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent.room">
+            <inheritdoc cref="P:Normal.Realtime.IRealtimeComponent.room"/>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeComponent`1">
+            <summary>
+            A component that synchronizes the state of a RealtimeModel to/from an object in the scene.
+            </summary>
+            <typeparam name="TModel">The model type for Normcore to instantiate for this component.</typeparam>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.model">
+            <summary>
+            The model associated with this component, or null if it hasn't been set yet. This reference is replaced
+            automatically when Realtime connects or disconnects. Override `OnRealtimeModelReplaced` in your
+            custom component to know when the model is replaced.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.Normal#Realtime#IConfigurableComponent#CreateModel">
+            <summary>
+            Create a new model for the component, configured by the component settings.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.Normal#Realtime#IConfigurableComponent#SetModel(Normal.Realtime.RealtimeModel)">
+            <summary>
+            Set a model on the component.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.Normal#Realtime#IConfigurableComponent#SetView(Normal.Realtime.RealtimeView)">
+            <summary>
+            Set the view which owns this component.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.realtimeView">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.realtime">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.room">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.ownerIDSelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.ownerIDInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isUnownedSelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isUnownedInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isOwnedLocallySelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isOwnedLocallyInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isOwnedRemotelySelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeComponent`1.isOwnedRemotelyInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.RequestOwnership">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.SetOwnership(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeComponent`1.ClearOwnership">
+            <inheritdoc/>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeTransform">
+            <summary>
+            A RealtimeComponent that synchronizes a Transform
+            </summary>
+            <remarks>RealtimeTransform uses the owner to signal which client's Transform should be considered the state of truth to write to the datastore. If the local client is not the owner of the RealtimeTransform component, it will treat the datastore as the source of truth.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isSyncingPosition">
+            <summary>
+            True if this transform is syncing its position with the model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isSyncingRotation">
+            <summary>
+            True if this transform is syncing its rotation with the model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isSyncingScale">
+            <summary>
+            True if this transform is syncing its scale with the model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isSyncingVelocity">
+            <summary>
+            True if the rigidbody on this transform is syncing its velocity with the model. If this is false, the
+            velocity will be derived on remote clients from the position updates. Deriving the velocity saves bandwidth
+            but is less accurate.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isSyncingAngularVelocity">
+            <summary>
+            True if the rigidbody on this transform is syncing its angular velocity with the model. If this is false,
+            the angular velocity will be derived on remote clients from the rotation updates. Deriving the angular
+            velocity saves bandwidth but is less accurate.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.maintainOwnershipWhileSleeping">
+            <summary>
+            If true, the RealtimeTransform will continue to be owned by the local client when the attached rigidbody
+            it goes to sleep. This will prevent other clients from taking over the simulation for this object; only
+            set it to true for objects that should always be simulated locally, like a player character.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransform._strategy">
+            <summary>
+            The swappable strategy for handling model updates (snapping, interpolation, rigidbody, etc).
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isPhysicsOwnershipAvailable">
+            <summary>
+            True if this transform can be taken over a remote client for physics simulation.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransform.isInterpolationWarmedUp">
+            <summary>
+            True if the transform has caught up to the interpolation delay.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.FixedUpdateEnumerator">
+            <summary>
+            This enumerator updates the strategy _after_ each physics update so that we can apply network
+            corrections, as opposed to FixedUpdate which is executed before the physics update.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.GetOrCreateStrategy">
+            <summary>
+            Get the transform strategy, or create one if it hasn't been constructed yet.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.SetTransformValues(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
+            <summary>
+            Set the transform position, rotation, and scale (filtered by the component settings).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.SetTransformFromModel">
+            <summary>
+            Set the transform position, rotation, and scale using the model (filtered by the component settings).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.SetModelValues(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
+            <summary>
+            Set the model position, rotation, and scale (filtered by the component settings).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransform.SetModelFromTransform">
+            <summary>
+            Set the model position, rotation, and scale using the local transform (filtered by the component settings).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetSafePosition(UnityEngine.Vector3)">
+            <summary>
+            Set the position, while checking for NaN and custom epsilon.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetSafeRotation(UnityEngine.Quaternion)">
+            <summary>
+            Set the rotation, while checking for NaN and custom epsilon.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetSafeScale(UnityEngine.Vector3)">
+            <summary>
+            Set the scale, while checking for NaN and custom epsilon.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetSafeVelocity(UnityEngine.Vector3)">
+            <summary>
+            Set the velocity, while checking for NaN and custom epsilon.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetSafeAngularVelocity(UnityEngine.Vector3)">
+            <summary>
+            Set the angular velocity, while checking for NaN and custom epsilon.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.GetPhysicsFlag(Normal.Realtime.RealtimeTransformModel.PhysicsState)">
+            <summary>
+            Get the value of an individual physics state flag.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformModel.SetPhysicsFlag(Normal.Realtime.RealtimeTransformModel.PhysicsState,System.Boolean)">
+            <summary>
+            Set a physics state flag to true or false.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.useGravity">
+            <summary>
+            True if the rigidbody on this transform is using gravity on the simulating client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.isKinematic">
+            <summary>
+            True if the rigidbody on this transform is kinematic on the simulating client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.isSleeping">
+            <summary>
+            True if the rigidbody on this transform is sleeping on the simulating client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.maintainOwnershipWhileSleeping">
+            <summary>
+            True if the rigidbody on this transform shouldn't clear ownership when it sleeps. This is useful for
+            rigidbodies that should never be simulated on different clients, like player objects.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.hasTransformChanges">
+            <summary>
+            True if the model has any pending transform changes it needs to send to the datastore.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.hasPhysicsBodyChanges">
+            <summary>
+            True if the model has any pending physics body changes it needs to send to the datastore.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformModel.hasPhysicsStateChanges">
+            <summary>
+            True if the model has any pending physics state changes it needs to send to the datastore.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.InterpolationDelay.delay">
+            <summary>
+            The current delay, in seconds.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.InterpolationDelay.basis">
+            <summary>
+            The last timestamp used to adjust the interpolation delay.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.InterpolationDelay._initialized">
+            <summary>
+            True if the delay has been initialized and should be incremented/decremented.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.InterpolationDelay._penaltyCounter">
+            <summary>
+            The penalty counter keeps track of how many times our delay has been outside the correct range.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.InterpolationDelay._correctCounter">
+            <summary>
+            The correct counter keeps track of how many times our delay has been inside the correct range.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.InterpolationDelay.Reset">
+            <summary>
+            Reset the delay to the default delay.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.InterpolationDelay.Adjust(System.Double,System.Double,System.Double)">
+            <summary>
+            Adjust the interpolation delay towards the ideal delay, accounting for jitter.
+            </summary>
+            <param name="sent">The Realtime room time when the packet was sent.</param>
+            <param name="arrived">The Realtime room time when the packet was received.</param>
+            <param name="sendrate">The Realtime room datastore frame duration.</param>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeTransformStrategy.Reset(Normal.Realtime.RealtimeTransformModel)">
+            <summary>
+            Reset the strategy with a new model.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeTransformStrategy.Update(Normal.Realtime.RealtimeTransformModel)">
+            <summary>
+            Perform per-frame operations on the transform. Called every render frame.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeTransformStrategy.OnRemoteModelDidRead(Normal.Realtime.RealtimeTransformModel,Normal.Realtime.RealtimeTransformModel.PropertyChangeSet)">
+            <summary>
+            Apply a remote transform update to the transform. Called after a network frame is received.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimeTransformStrategy.OnLocalModelWillWrite(Normal.Realtime.RealtimeTransformModel)">
+            <summary>
+            Write the local transform state to the model. Called when a network frame is about to be written.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformInterpolation._timeline">
+            <summary>
+            A time-ordered series of TransformSnapshot objects.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformInterpolation._delay">
+            <summary>
+            The interpolation delay in seconds for this object.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformInterpolation.roomTime">
+            <summary>
+            The Realtime room time, or 0 when disconnected.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformRigidbody._physicsBodyTimeline">
+            <summary>
+            A timeline of rigidbody transforms and velocities, with custom interpolation.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformRigidbody._physicsStateTimeline">
+            <summary>
+            A timeline of physics state flags. We track these independently because they are synced on the reliable
+            channel, meaning they may come at different times than the transform values. They are also interpolated
+            differently than the transform values; we snap to the last update, since they are all booleans.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformRigidbody._delay">
+            <summary>
+            The interpolation delay in seconds for this object.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeTransformRigidbody.roomTime">
+            <summary>
+            The Realtime room time, or 0 when disconnected.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeTransformRigidbody._fixedRoomTime">
+            <summary>
+            The fixed room time, which is the closest approximation of the Realtime room time but only incremented by
+            the fixed timestep. This is necessary to maintain smooth interpolation.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.ResetFixedRoomTime">
+            <summary>
+            Reset the fixed room time and mark it as uninitialized.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.InitializeFixedRoomTime">
+            <summary>
+            Initialize the fixed room time to the room time.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.IncrementFixedRoomTime">
+            <summary>
+            Increment the fixed room time by the fixed delta time.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.CorrectFixedRoomTimeDrift">
+            <summary>
+            Reset the fixed room time to the room time if it drifts too far.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.ReconstructFixedTimestamp(System.Double,System.Single)">
+            <summary>
+            Construct a fixed timestamp from the packet room time and the serialized fixed time offset.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.SetModelFromRigidbody(Normal.Realtime.RealtimeTransformModel)">
+            <summary>
+            Apply the current rigidbody state to the model. This is broken out into a separate method so it can be
+            used by both the OnWillWrite callback and the initialization method.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.ShouldSendVelocity">
+            <summary>
+            True if the  velocity has changed by a large margin since the last write, or if the component is explicitly
+            set to sync the velocity.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.ShouldSendAngularVelocity">
+            <summary>
+            True if the angular velocity has changed by a large margin since the last write, or if the component is
+            explicitly set to sync the angular velocity.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.DeriveVelocity(UnityEngine.Vector3,UnityEngine.Vector3,System.Single)">
+            <summary>
+            Derive a velocity from two positions.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeTransformRigidbody.DeriveAngularVelocity(UnityEngine.Quaternion,UnityEngine.Quaternion,System.Single)">
+            <summary>
+            Derive an angular velocity from two rotations.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.TimelineInterpolator`1">
+            <summary>
+            An interpolation delegate should return a value interpolated between two timeline entries. The two entries
+            will be a pair of entries sandwiching the interpolation time.
+            </summary>
+            <param name="a">The starting interpolation entry.</param>
+            <param name="b">The ending interpolation entry.</param>
+            <param name="t">The normalized (between 0 and 1) time between the two entries.</param>
+            <typeparam name="T">The timeline value type.</typeparam>
+        </member>
+        <member name="T:Normal.Realtime.TimelineExtrapolator`1">
+            <summary>
+            An extrapolation delegate should return a value extrapolated from the closest frame on the timeline. The
+            closest frame may be ahead or behind the extrapolation time. If the timeline is extrapolating forwards, the
+            closest frame will be the newest frame. If the timeline is extrapolating backwards, the closest frame will be
+            the oldest frame on the timeline. The extrapolation direction can be derived by comparing the frame time with
+            the extrapolation time.
+            </summary>
+            <param name="frame">The closest extrapolation frame.</param>
+            <param name="time">The absolute time to extrapolate a value at.</param>
+            <typeparam name="T">The timeline value type.</typeparam>
+        </member>
+        <member name="F:Normal.Realtime.TimelineEntry`1.time">
+            <summary>
+            The absolute time of this entry.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.TimelineEntry`1.value">
+            <summary>
+            The timeline value in this entry.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.TimelineEntry`1.prev">
+            <summary>
+            The previous timeline entry. If this is the oldest entry in the timeline, the previous entry is null.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.TimelineEntry`1.next">
+            <summary>
+            The next timeline entry. If this is the newest entry in the timeline, the next entry is null.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Timeline`1.isEmpty">
+            <summary>
+            True if the timeline is empty.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Timeline`1.isNotEmpty">
+            <summary>
+            True if the timeline has values.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.Clear">
+            <summary>
+            Clear the timeline.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.IsTimeInsideTimeline(System.Double)">
+            <summary>
+            True if the time is inside the span of the timeline and can be interpolated.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.IsTimeAheadTimeline(System.Double)">
+            <summary>
+            True if the time is newer than the newer frame in the timeline (or the timeline is empty).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.IsTimeBehindTimeline(System.Double)">
+            <summary>
+            True if the time is older than the oldest frame in the timeline (or the timeline is empty).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.GetNewestTime">
+            <summary>
+            Get the newest timestamp in the timeline. This value is cached for quick access.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.GetNewestValue">
+            <summary>
+            Get the newest value in the timeline.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.GetValueAtIndex(System.Int32)">
+            <summary>
+            Get a value by index. The newest value is indexed at 0, the oldest value is indexed at `count - 1`.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.GetOldestTime">
+            <summary>
+            Get the oldest timestamp in the timeline. This value is cached for quick access.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.GetOldestValue">
+            <summary>
+            Get the oldest value in the timeline.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.Add(System.Double,`0)">
+            <summary>
+            Add a snapshot to the front of the timeline.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the snapshot is not newer than the newest timestamp.</exception>
+        </member>
+        <member name="M:Normal.Realtime.Timeline`1.Get(System.Double)">
+            <summary>
+            Get an interpolated position/rotation/scale within the timeline. If the input time is outside the timeline,
+            this returns the snapshot closest to the timestamp.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the timeline is empty.</exception>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.PropertyHeader">
+            <summary>
+            A PropertyHeader encapsulates the header serialization (ID and wiretype) of a single property.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.Serialization.PropertyHeader.propertyID">
+            <summary>
+            The property ID. This must be consistent across all clients.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.Serialization.PropertyHeader.propertyWireType">
+            <summary>
+            The property wire type.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.PropertyHeader.#ctor(System.UInt32,Normal.Realtime.Serialization.Serialization.WireType)">
+            <summary>
+            Construct a property header with an explicit wire type.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.InflightUpdateNotifier">
+            <summary>
+            An event notifier that lets the datastore notify properties when a reliable update is acked by the server.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.Serialization.InflightUpdateNotifier._properties">
+            <summary>
+            A dictionary mapping update IDs to lists of properties interested in their ack.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.Serialization.InflightUpdateNotifier._pool">
+            <summary>
+            A pool of unused lists. We return empty lists to the pool to reduce allocations.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.InflightUpdateNotifier.Subscribe(System.UInt32,Normal.Realtime.IConfirmedProperty)">
+            <summary>
+            Subscribe a property to an update ID ack.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.InflightUpdateNotifier.Unsubscribe(System.UInt32,Normal.Realtime.IConfirmedProperty)">
+            <summary>
+            Unsubscribe a property from receiving acks.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.InflightUpdateNotifier.AckUpdateID(System.UInt32)">
+            <summary>
+            Invoke all of the callbacks for a specific update ID. The callbacks will be removed after they invoked.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.InflightUpdateNotifier.TakePropertyList">
+            <summary>
+            Return a property set from the pool, or create a new one if it's empty.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.InflightUpdateNotifier.ReleasePropertyList(System.UInt32)">
+            <summary>
+            Remove a property list from storage and place it in the unused pool.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.MetaModel">
+            <summary>
+            The MetaModel is a model that's used to send metadata about a model to the server. It's always exclusively serialized under propertyID 0 and must always be serialized before any other propertyIDs.
+            </summary>
+            <remarks>MetaModel instances should never need to be accessed directly. RealtimeModel and RealtimeComponents exposes public properties and methods that let you set this state.</remarks>
+        </member>
+        <member name="F:Normal.Realtime.Serialization.MetaModel.ReservedPropertyID">
+            <summary>
+            The propertyID reserved for serializing metamodel instances inside of a RealtimeModel.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.MetaModel.ownerID">
+            <summary>
+            The client ID of the model owner. A value of -1 is unowned, anything greater is a client ID.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.MetaModel.lifetimeFlags">
+            <summary>
+            The lifetime flags for the model that this metamodel belongs to.
+            </summary>
+            <remarks>In the next major version, this will be replaced with individual boolean properties</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.MetaModel.modelType">
+            <summary>
+            Used to specify if this model is a special model (used by the server to implement server-side logic)
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.MetaModel.LifetimeFlags">
+            <summary>
+            Flags used to signal how the lifetime of this object should be handled by the server.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.RealtimeArray`1">
+            <summary>
+            RealtimeArray is a special model type that holds a sequential list of models that can be modified at runtime.
+            Modifying the array sends the minimal amount of information necessary for other clients to replicate the change. The whole collection is not sent every time.
+            </summary>
+            <typeparam name="TValue">The model type to store in the collection.</typeparam>
+            <remarks>
+            This array collection is very limited because it is designed to support adding elements from multiple clients simultaneously. If you need the
+            ability to add and remove elements at runtime, use RealtimeSet or RealtimeDictionary instead.
+            </remarks>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeArray`1.modelAdded">
+            <summary>
+            An event that fires when a model is added locally or remotely.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeArray`1.Add(`0)">
+            <summary>
+            Appends a RealtimeModel to the end of the array.
+            </summary>
+            <param name="value">The model to add. This value cannot be null.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the model provided is null.</exception>
+            <remarks>Add operations take effect instantly. If the server rejects a change (due to ownership) the model will be removed.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.RealtimeArray`1.Count">
+            <summary>
+            The number of models currently stored in the collection.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.RealtimeArray`1.Item(System.Int32)">
+            <summary>
+            Retrieve a model given a specific index.
+            </summary>
+            <param name="index">The index of the model to retrieve</param>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeArray`1._ReadArrayUpdate(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext,System.UInt32)">
+            <summary>
+            Internal. Do not use.
+            </summary>
+            <remarks>This will be removed in the next major version.</remarks>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.RealtimeDictionary`1">
+             <summary>
+             RealtimeDictionary is a special model type that represents an dictionary of models. This collection can be modified by multiple clients simultaneously without
+             introducing datastore conflicts. All updates are applied instantly and are rolled back if rejected by the server (due to ownership).
+            
+             Adding or removing items sends the minimal amount of information to the server in order to perform the update on all clients. The whole collection is not sent every time.
+             </summary>
+             <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeDictionary`1.modelAdded">
+            <summary>
+            An event that fires when a model is added locally or remotely.
+            </summary>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeDictionary`1.modelReplaced">
+            <summary>
+            An event that fires when a model is replaced locally or remotely.
+            </summary>
+            <remarks>A model is considered replaced (as opposed to removed and added) if a new model is added that overwrites an existing model under the same key.</remarks>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeDictionary`1.modelRemoved">
+            <summary>
+            An event that fires when a model is removed locally or remotely.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.RealtimeDictionary`1.Item(System.UInt32)">
+            <summary>
+            Access a model for a specific key.
+            </summary>
+            <param name="key">The key of the model.</param>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeDictionary`1.Add(System.UInt32,`0)">
+            <summary>
+            Add a model to the collection.
+            </summary>
+            <param name="key">The key to store the model under</param>
+            <param name="value">The model to store in the collection</param>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeDictionary`1.Remove(System.UInt32)">
+            <summary>
+            Remove a model from the collection.
+            </summary>
+            <param name="key">The key of the model to remove</param>
+            <returns>A boolean to indicate whether the key was contained within the collection.</returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.RealtimeDictionary`1.Count">
+            <summary>
+            The number of models currently stored in the collection.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeDictionary`1.TryGetValue(System.UInt32,`0@)">
+            <summary>
+            Attempt to retrieve a value from the collection.
+            </summary>
+            <param name="key">The key of the model to fetch.</param>
+            <param name="value">The model if one is found, otherwise null.</param>
+            <returns>A boolean indicating whether the key was found within the collection.</returns>
+            <remarks>This method will not throw an exception if the key is not found.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeDictionary`1.ContainsKey(System.UInt32)">
+            <summary>
+            Check if a key exists within the collection.
+            </summary>
+            <param name="key">The key to search for.</param>
+            <returns>A boolean indicating whether the key was found within the collection.</returns>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeDictionary`1.Contains(`0)">
+            <summary>
+            Check if a model instance is contained in the collection.
+            </summary>
+            <param name="value">The model instance to look for.</param>
+            <returns>A boolean indicating whether the value was found within the collection.</returns>
+            <remarks>This method is very slow! If you need high performance value searching, you should use the added/replaced/removed events to mirror this collection to a faster collection type.</remarks>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.RealtimeSet`1">
+             <summary>
+             RealtimeSet is a special model type that represents an unordered collection of models. Internally this is used for things like keeping track of all RealtimeViews in the scene.
+             If order is not important, this collection is the recommended collection to use for storing collections of models. All updates are applied instantly and are rolled back if
+             rejected by the server (due to ownership).
+            
+             Adding or removing items sends the minimal amount of information to the server in order to perform the update on all clients. The whole collection is not sent every time.
+             </summary>
+             <typeparam name="TValue">The model type to store in the collection</typeparam>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeSet`1.modelAdded">
+            <summary>
+            An event that fires when a model is added locally or remotely.
+            </summary>
+        </member>
+        <member name="E:Normal.Realtime.Serialization.RealtimeSet`1.modelRemoved">
+            <summary>
+            An event that fires when a model is removed locally or remotely.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeSet`1.Add(`0)">
+            <summary>
+            Add a model to the collection
+            </summary>
+            <param name="value">The model to add. This value cannot be null.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.RealtimeSet`1.Remove(`0)">
+            <summary>
+            Remove a model from the collection.
+            </summary>
+            <param name="value">The model to remove.</param>
+            <returns>A boolean to indicate whether the model was contained within the collection.</returns>
+        </member>
+        <member name="P:Normal.Realtime.Serialization.RealtimeSet`1.Count">
+            <summary>
+            The number of models currently stored in the collection.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.ByteFloat">
+            <summary>
+            A struct for reinterpreting a float as equivalent bytes in a uint.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.ByteDouble">
+            <summary>
+            A struct for reinterpreting a double as equivalent bytes in a ulong.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Serialization.ISerializer">
+            <summary>
+            ISerializer is a shared concrete base interface for all stream formatters.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Normal.Realtime.Serialization.ISerializer`1" -->
+        <member name="M:Normal.Realtime.Serialization.ISerializer`1.Length(`0)">
+            <summary>
+            Calculate the byte length of the value.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.ISerializer`1.Write(Normal.Realtime.Serialization.WriteStream@,`0)">
+            <summary>
+            Serialize a value to the write stream.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.ISerializer`1.Read(Normal.Realtime.Serialization.ReadStream@,`0@)">
+            <summary>
+            Deserialize and return a value from a read stream.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.StreamContext.AsFullModel">
+            <summary>
+            Copy the stream context, with full model set to true.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.StreamEventDispatcher.AddStreamCallback(System.UInt32,Normal.Realtime.Serialization.StreamEventDispatcher.StreamUpdateCallback)">
+            <summary>
+            Add a callback for future updates with a specific update ID. This can only be added once per update ID, and
+            will be automatically removed from the stream event dispatcher after it is invoked.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.StreamEventDispatcher.RemoveStreamCallback(Normal.Realtime.Serialization.StreamEventDispatcher.StreamUpdateCallback)">
+            <summary>
+            Remove a callback from all update IDs.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.StreamEventDispatcher.InvokeCallbacksForUpdateID(System.UInt32)">
+            <summary>
+            Invoke all of the callbacks for a specific update ID. The callbacks will be removed after they invoked.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.WriteStream.LengthString(System.String)">
+            <summary>
+            Returns the serialized size in bytes of the value. A null value is serialized as an empty string.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Serialization.WriteStream.LengthBytes(System.Byte[])">
+            <summary>
+            Returns the serialized size in bytes of the value. A null value is serialized as an empty byte array.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.CollectionUtilities.SetParentOnIModel(Normal.Realtime.Serialization.IModel,Normal.Realtime.RealtimeModel)">
+            <summary>
+            Cast an IModel to a RealtimeModel and set its parent, throwing an exception if we can't cast it, or
+            if the model already has a parent.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.PropertySerializer`1">
+            <summary>
+            Serializer for a Realtime property that automatically creates and writes the header.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Collections.StringKeyDictionary`1">
+             <summary>
+             StringKeyDictionary represents a dictionary collection of models. Unlike RealtimeDictionary, StringKeyDictionary is transactional.
+             This means that models are not added to the collection until they are confirmed by the server. If any key has been modified before
+             your change reaches the server, it will be rejected. It is up to your application to decide whether to retry the operation.
+            
+             Adding or removing items sends the minimal amount of information to the server in order to perform the update on all clients. The
+             whole collection is not sent every time. Once a key has been added, it is assigned a unique ID by the server to reduce bandwidth
+             for future updates.
+             </summary>
+             <typeparam name="TValue">The model type to store in the collection</typeparam>
+        </member>
+        <member name="E:Normal.Realtime.Collections.StringKeyDictionary`1.didInsertModelForKey">
+            <summary>
+            An event that fires when a model is successfully added to the collection by any client.
+            </summary>
+        </member>
+        <member name="E:Normal.Realtime.Collections.StringKeyDictionary`1.didRemoveModelForKey">
+            <summary>
+            An event that fires when a model is successfully removed from the collection by any client.
+            </summary>
+        </member>
+        <member name="E:Normal.Realtime.Collections.StringKeyDictionary`1.didClearAllModels">
+            <summary>
+            An event that fires when the collection is cleared by any client.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.Insert(System.String,`0,System.Action{System.Boolean})">
+            <summary>
+            Insert a model into the collection. The model will not be inserted until the server confirms the transaction.
+            </summary>
+            <param name="key">The key to use to store the model.</param>
+            <param name="value">The model to store in the collection. This value cannot be null.</param>
+            <param name="completionHandler">A completion handler that fires when the operation is complete along with a boolean to indicate if the transaction was successful.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.Remove(System.String,System.Action{System.Boolean})">
+            <summary>
+            Remove a model from the collection. The model will not be removed until the server confirms the transaction.
+            </summary>
+            <param name="key">The key of the model to remove.</param>
+            <param name="completionHandler">A completion handler that fires when the operation is complete along with a boolean to indicate if the transaction was successful.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.Clear(System.Action{System.Boolean})">
+            <summary>
+            Clear all models from the collection. Models will not be removed until the server confirms the transaction.
+            </summary>
+            <param name="completionHandler">A completion handler that fires when the operation is complete along with a boolean to indicate if the transaction was successful.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <remarks>This operation will be rejected if any keys have been modified before the clear operation reaches the server.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Collections.StringKeyDictionary`1.Item(System.String)">
+            <summary>
+            Retrieve a model given a specific key.
+            </summary>
+            <param name="index">The index of the model to retrieve</param>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.TryGetValue(System.String,`0@)">
+            <summary>
+            Attempt to retrieve a value from the collection.
+            </summary>
+            <param name="key">The key of the model to fetch.</param>
+            <param name="value">The model if one is found, otherwise null.</param>
+            <returns>A boolean indicating whether the key was found within the collection.</returns>
+            <remarks>This method will not throw an exception if the key is not found.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.ContainsKey(System.String)">
+            <summary>
+            Check if a key exists within the collection.
+            </summary>
+            <param name="key">The key to search for.</param>
+            <returns>A boolean indicating whether the key was found within the collection.</returns>
+        </member>
+        <member name="M:Normal.Realtime.Collections.StringKeyDictionary`1.ContainsValue(`0)">
+            <summary>
+            Check if a model instance is contained in the collection.
+            </summary>
+            <param name="value">The RealtimeModel instance to look for.</param>
+            <returns>A boolean indicating whether the value was found within the collection.</returns>
+            <remarks>This method has equivalent performance to Dictionary&lt;T, V&gt;.ContainsValue().</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Collections.StringKeyDictionary`1.Count">
+            <summary>
+            The number of models currently stored in the collection.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimePrefabMetadata">
+            <summary>
+            A struct representing the prefab metadata from the datastore that should be used to locate a corresponding realtime prefab.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimePrefabMetadata.prefabName">
+            <summary>
+            The name of the prefab asset to load.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.IRealtimePrefabLoadDelegate">
+            <summary>
+            A delegate used by Realtime / Room to load a prefab for instantiation. This can be used to redirect a prefabName in the datastore to another prefab or to use a different prefab loading API such as Addressables.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimePrefabLoadDelegate.LoadRealtimePrefab(Normal.Realtime.RealtimePrefabMetadata)">
+            <summary>
+            Called by Room to load a prefab for a given prefab name. The default implementation calls Resources.Load&lt;GameObject&gt;(prefabName).
+            </summary>
+            <param name="prefabMetadata">The metadata stored in the datastore to reference this realtime prefab.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Normal.Realtime.IRealtimePrefabInstantiateDelegate">
+            <summary>
+            A delegate used by Realtime / Room to instantiate and destroy prefab instances. This can be used to implement object pooling for realtime prefab instances.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimePrefabInstantiateDelegate.InstantiateRealtimePrefab(UnityEngine.GameObject)">
+            <summary>
+            Called by Room to instantiate an instance of the given prefab. The default implementation calls UnityEngine.Object.Instantiate(prefab).
+            </summary>
+            <param name="prefab">The prefab that should be instantiated.</param>
+            <returns>The prefab instance.</returns>
+        </member>
+        <member name="M:Normal.Realtime.IRealtimePrefabInstantiateDelegate.DestroyRealtimePrefab(UnityEngine.GameObject)">
+            <summary>
+            Called by Room to destroy a realtime prefab instance. The default implementation calls UnityEngine.Object.Destroy(prefabInstance).
+            </summary>
+            <remarks>When implementing object pooling, use this method to return the prefab to the pool.</remarks>
+            <param name="prefabInstance"></param>
+        </member>
+        <member name="P:Normal.Realtime.IProperty`1.value">
+            <summary>
+            The property value.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IProperty`1.WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Return the length of the property for a given context.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IProperty`1.Write(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Write the property to the stream, if needed. Returns true if the property was written.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IProperty`1.Read(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Read the property from the stream. Returns true if the property changed.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IConfirmedProperty.Confirm(System.UInt32)">
+            <summary>
+            Confirm an update as received by the server. This is _not_ an acknowledgement that the property value was
+            accepted, only that the update is no longer inflight. If the property value was accepted, it is sent back to
+            the local client in the preceding read.
+            </summary>
+            <param name="updateID"></param>
+        </member>
+        <member name="M:Normal.Realtime.IConfirmedProperty.UnsubscribeCallback">
+            <summary>
+            Reset the property to the confirmed value, clearing any inflight update.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeWireTypeAttribute">
+            <summary>
+            An attribute that can be applied to an event on a RealtimeModel in order to get notifications when a model is serialized/deserialized.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.ModelProperty`1">
+            <summary>
+            A ModelProperty writes and reads other Realtime models.
+            </summary>
+            <typeparam name="T">The model type, which must implement IModel.</typeparam>
+        </member>
+        <member name="F:Normal.Realtime.ModelProperty`1._header">
+            <summary>
+            The property header. This is added to every WriteLength and Write of the property.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.ModelProperty`1.value">
+            <summary>
+            The property model.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.ModelProperty`1.WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.ModelProperty`1.Write(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.ModelProperty`1.Read(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="T:Normal.Realtime.ReliableProperty`1">
+            <summary>
+            A ReliableProperty writes and reads primitives and structs on the reliable channel.
+            </summary>
+            <typeparam name="T">The property value type.</typeparam>
+        </member>
+        <member name="F:Normal.Realtime.ReliableProperty`1.serializer">
+            <summary>
+            The property serializer.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.ReliableProperty`1._confirmed">
+            <summary>
+            The confirmed property value (last read from the server). If our last write is cancelled, we reset the
+            local property value back to the confirmed property value.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.ReliableProperty`1._value">
+            <summary>
+            The local property value.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.ReliableProperty`1._inflight">
+            <summary>
+            The update ID of the current inflight update.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.ReliableProperty`1.dirty">
+            <summary>
+            True if the property has local changes.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.ReliableProperty`1.WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.ReliableProperty`1.Write(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.ReliableProperty`1.Read(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.ReliableProperty`1.Confirm(System.UInt32)">
+            <summary>
+            Confirm an update ID.
+            </summary>
+            <param name="updateID"></param>
+        </member>
+        <member name="M:Normal.Realtime.ReliableProperty`1.UnsubscribeCallback">
+            <summary>
+            Unsubscribe the inflight notification. The local value will remain unchanged.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.UnreliableProperty`1">
+            <summary>
+            An UnreliableProperty writes and reads primitives and structs on the unreliable channel. The local value is not
+            guaranteed to be in sync with the server value, and does not resend on packet loss, but is more bandwidth
+            efficient.
+            </summary>
+            <typeparam name="T">The property value type.</typeparam>
+        </member>
+        <member name="F:Normal.Realtime.UnreliableProperty`1.serializer">
+            <summary>
+            The property serializer.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.UnreliableProperty`1._value">
+            <summary>
+            The property value.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.UnreliableProperty`1.value">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="P:Normal.Realtime.UnreliableProperty`1.dirty">
+            <summary>
+            True if the property has local changes.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.UnreliableProperty`1.WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.UnreliableProperty`1.Write(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="M:Normal.Realtime.UnreliableProperty`1.Read(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext)">
+            <inheritdoc cref="T:Normal.Realtime.IProperty`1"/>
+        </member>
+        <member name="T:Normal.Realtime.PropertyChangeSet">
+            <summary>
+            A PropertyChangeSet is used to store which properties were changed during a read or write operation.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.PropertyChangeSet.Clear">
+            <summary>
+            Internal. Do not use.
+            </summary>
+            <remarks>This is used by auto-generated RealtimeModel serialization code and is required to be public, but is not a public API.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.PropertyChangeSet.SetPropertyChanged(System.UInt32)">
+            <summary>
+            Internal. Do not use.
+            </summary>
+            <remarks>This is used by auto-generated RealtimeModel serialization code and is required to be public, but is not a public API.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.PropertyChangeSet.anyPropertiesChanged">
+            <summary>
+            True if any of the properties have changed.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.PropertyChangeSet.Item(System.UInt32)">
+            <summary>
+            True if the indexed property has changed.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeModel">
+            <summary>
+            A model that represents a set of data to store in a room datastore.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isFreshModel">
+            <summary>
+            True if this model was just locally created. This flag can be used to apply component settings or initial
+            values to a newly instantiated model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.hasMetaModel">
+            <summary>
+            True if the model has a meta-model. A meta-model is required for a client to take ownership of a model. You
+            can add a meta-model to a custom model with the `createMetaModel` flag on the `RealtimeModel` attribute.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.SetMetaModel(Normal.Realtime.Serialization.MetaModel)">
+            <summary>
+            Replace the meta-model on this model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.preventOwnershipTakeover">
+            <summary>
+            If true, the model owner must clear ownership before another client can request it.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.destroyWhenOwnerOrLastClientLeaves">
+            <summary>
+            If true, the model is destroyed when the owner or last client in the room leaves.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isPersistent">
+            <summary>
+            If true, the object will persist after all clients leave the room.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.destroyWhenLastClientLeaves">
+            <summary>
+            If true, the model is destroyed when the last client in the room leaves.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.destroyWhenOwnerLeaves">
+            <summary>
+            If true, the model is destroyed when the last client in the room leaves.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.GetLifetimeFlag(Normal.Realtime.Serialization.MetaModel.LifetimeFlags)">
+            <summary>
+            Returns true if the specified lifetime flag is set. If the model has no meta-model, this always returns false.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.SetLifetimeFlag(Normal.Realtime.Serialization.MetaModel.LifetimeFlags,System.Boolean)">
+            <summary>
+            Set or clear a single lifetime flag.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.WriteMetaModel(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Write the meta-model to the write stream, if one exists.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.ReadMetaModel(Normal.Realtime.Serialization.ReadStream,Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Read the meta-model from the read stream, or skip the property if this model doesn't have a meta-model.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.MetaModelWriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Get the meta-model write length, or 0 if this model doesn't have a meta-model.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.room">
+            <summary>
+            The room managing this model, or null if this model is disconnected.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isRoomConnected">
+            <summary>
+            True if a room is set on this model and the room is connected.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.SubscribeEventCallback(Normal.Realtime.RealtimeModelEvent,System.Action)">
+            <summary>
+            Subscribe an action to a model event. Only one action can be subscribed at a time; any multicasting
+            should happen in the callback. The best way to subscribe to callbacks is with a [RealtimeCallback] in
+            your model layout.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.UnsubscribeEventCallback(Normal.Realtime.RealtimeModelEvent)">
+            <summary>
+            Unsubscribe the associated action from a model event.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.ownerIDSelf">
+            <summary>
+            The client ID of the model owner. If the model is unowned, this returns -1.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.ownerIDInHierarchy">
+            <summary>
+            The client ID of the model in its hierarchy. This is the furthest owned ancestor without owned ancestors.
+            If the model and all of its ancestors are unowned, this returns -1.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isUnownedSelf">
+            <summary>
+            True if this model is not owned by any client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isUnownedInHierarchy">
+            <summary>
+            True if this model and all of its parent models are not owned by any client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isOwnedRemotelySelf">
+            <summary>
+            True if this model is owned by a remote client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isOwnedRemotelyInHierarchy">
+            <summary>
+            True if this model or any of its parents are owned remotely.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isOwnedLocallySelf">
+            <summary>
+            True if this model is owned by the local client.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isOwnedLocallyInHierarchy">
+            <summary>
+            True if this model or any of its parents are owned locally.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.RequestOwnership(System.Boolean)">
+            <summary>
+            Request ownership of the model, if it is unowned. This has no effect if the model has no meta-model. This
+            will throw an exception if the model is not part of a connected room, as it requires the local clientID.
+            </summary>
+            <param name="sendRedundantUpdates">If true, send the ownership update even if the model is already owned
+                by the local client. This might send redundant updates but is useful if you expect contention. This
+                does not circumvent the "Prevent Ownership Takeover" lifetime flag if it applies.</param>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.SetOwnership(System.Int32,System.Boolean)">
+            <summary>
+            Set ownership of the model to a specific client. This has no effect if the model has no meta-model.
+            </summary>
+            <param name="ownerID">The client ID of the new owner.</param>
+            <param name="sendRedundantUpdates">If true, send the ownership update even if the model is already owned
+                by the specified ownerID. This might send redundant updates but is useful if you expect contention. This
+                does not circumvent the "Prevent Ownership Takeover" lifetime flag if it applies.</param>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.ClearOwnership(System.Boolean)">
+            <summary>
+            Clear ownership of the model, if it is owned by the local client.
+            </summary>
+            <param name="sendRedundantUpdates">If true, send the ownership update even if the model is already unowned.
+                This might send redundant updates but is useful if you expect contention. This does not circumvent the
+                "Prevent Ownership Takeover" lifetime flag if it applies.</param>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isCachedLengthDirty">
+            <summary>
+            True if the reliable and unreliable lengths are dirty and need to be recalculated.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isReliableLengthDirty">
+            <summary>
+            True if the reliable length is dirty and needs to be recalculated.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeModel.isUnreliableLengthDirty">
+            <summary>
+            True if the unreliable length is dirty and needs to be recalculated.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.InvalidateCachedLength">
+            <summary>
+            Invalidate both the reliable and unreliable cached length.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.InvalidateReliableLength">
+            <summary>
+            Invalidate the reliable cached length.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.InvalidateUnreliableLength">
+            <summary>
+            Invalidate the unreliable cached length.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.InvalidateContextLength(Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Invalidate either the reliable or unreliable length, depending on the stream context.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.Normal#Realtime#Serialization#IStreamWriter#WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Get the cached write length (or recalculate it if it's dirty).
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.WriteLength(Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Recalculate a fresh model length for a given stream context. The result will be cached for future writes.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeModel.Write(Normal.Realtime.Serialization.WriteStream,Normal.Realtime.Serialization.StreamContext)">
+            <summary>
+            Write the model to the stream.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeModelEvent">
+            <summary>
+            An enum that represents the type of event to subscribe to. Generally used with [RealtimeCallback]
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeModelEvent.OnWillWrite">
+            <summary>
+            Dispatched before a serialization pass.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeModelEvent.OnDidWrite">
+            <summary>
+            Dispatched after a serialization pass.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeModelEvent.OnWillRead">
+            <summary>
+            Dispatched before a deserialization pass.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeModelEvent.OnDidRead">
+            <summary>
+            Dispatched after a deserialization pass.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeModelEvent.OnDidReadProperties">
+            <summary>
+            Dispatched after a model reads properties from a remote update.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Realtime">
+            <summary>
+            Realtime manages a Room object and synchronizes its datastore to RealtimeViews and RealtimeComponents in the scene.
+            </summary>
+            <remarks>Each Realtime instance represents a single room connection. If you would like to connect to multiple rooms simultaneously, use multiple instances of Realtime on different GameObjects.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.instances">
+            <summary>
+            All of the Realtime instances currently loaded in scenes.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.Realtime.InstantiateOptions">
+            <summary>
+            Options for Realtime.Instantiate. You only need to provide options you want to override. By default, prefabs
+            are owned by the creating client and destroyed when the owner or last client leaves.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.Realtime.InstantiateOptions.defaults">
+            <summary>
+            The default instantiation options.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Instantiate(System.String,System.Nullable{Normal.Realtime.Realtime.InstantiateOptions})">
+            <summary>
+            Instantiates a realtime prefab in the scene on all clients.
+            </summary>
+            <param name="prefabName">The name of the prefab to instantiate. The prefab must contain a RealtimeView on the root and it must live within a Resources folder or Unity will not be able to locate it on other clients.</param>
+            <param name="options">Used to override the default ownership / lifetime settings for the object or to use a specific instance of Realtime when multiple instances are available in the scene.</param>
+            <returns>The fully instantiated game object. All RealtimeViews and RealtimeComponents, along with their models will be initialized and ready for use immediately.</returns>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Instantiate(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Nullable{Normal.Realtime.Realtime.InstantiateOptions})">
+            <summary>
+            Instantiates a realtime prefab in the scene on all clients.
+            </summary>
+            <param name="prefabName">The name of the prefab to instantiate. The prefab must contain a RealtimeView on the root and it must live within a Resources folder or Unity will not be able to locate it on other clients.</param>
+            <param name="position">A position in world space to instantiate the prefab</param>
+            <param name="rotation">A rotation in world space to instantiate the prefab</param>
+            <param name="options">Used to override the default ownership / lifetime settings for the object or to use a specific instance of Realtime when multiple instances are available in the scene.</param>
+            <returns>The fully instantiated game object. All RealtimeViews and RealtimeComponents, along with their models will be initialized and ready for use immediately.</returns>
+            <remarks>In order for the position/rotation parameters to work, a RealtimeTransform component must be present on the root of the prefab. This method will automatically call RequestOwnership() on it.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.FindRealtimeInstance">
+            <summary>
+            Find a Realtime instance to use for prefab instantiation. Passing an existing Realtime reference as the
+            instance will use that instance instead of looking at the static set.
+            </summary>
+            <param name="instance">The Realtime instance to use.</param>
+            <returns>True if we found a valid instance to use.</returns>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.RepositionRealtimePrefab(UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Reposition a newly instantiated Realtime prefab.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Destroy(UnityEngine.GameObject)">
+            <summary>
+            Destroys a realtime prefab on all clients.
+            </summary>
+            <remarks>This method must be used instead of GameObject.Destroy(). It can only be used with GameObjects that were instantiated with Realtime.Instantiate().</remarks>
+            <param name="gameObject">The game object to destroy.</param>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Destroy(Normal.Realtime.RealtimeView)">
+            <summary>
+            Destroys a realtime prefab on all clients.
+            </summary>
+            <remarks>This method must be used instead of GameObject.Destroy(). It can only be used with GameObjects that were instantiated with Realtime.Instantiate().</remarks>
+            <param name="realtimeView">The realtime view on the root of the game object to destroy.</param>
+        </member>
+        <member name="T:Normal.Realtime.Realtime.RealtimeEvent">
+            <summary>
+            An event fired by Realtime (typically didConnectToRoom or didDisconnectFromRoom)
+            </summary>
+            <param name="realtime">The instance of Realtime that fired the event.</param>
+        </member>
+        <member name="E:Normal.Realtime.Realtime.didConnectToRoom">
+            <summary>
+            An event that is fired when Realtime is connected to a room and all realtime prefabs and realtime views in the scene have been successfully connected to the datastore.
+            </summary>
+        </member>
+        <member name="E:Normal.Realtime.Realtime.didDisconnectFromRoom">
+            <summary>
+            An event that is fired when Realtime is disconnected from a room.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.roomToJoinOnStart">
+            <summary>
+            The name of the room to join on start if one was configured in the inspector.
+            </summary>
+            <remarks>This setting can only be configured in the editor inspector. If you'd like to change this name at runtime, disable join room on start, and use the Connect() method on Realtime instead.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.joinRoomOnStart">
+            <summary>
+            A boolean indicating whether Realtime will try to automatically connect on Start().
+            </summary>
+            <remarks>This setting can only be configured in the editor inspector. If you'd like to change this name at runtime, disable join room on start, and use the Connect() method on Realtime instead.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.normcoreAppSettings">
+            <summary>
+            The app settings object reference used when Realtime connects. Changing this while the Realtime instance is
+            connected will not have any effect until the next time it connects.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.connecting">
+            <summary>
+            True if this Realtime instance is in the process of connecting or initializing its views.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.connected">
+            <summary>
+            True if this Realtime instance is connected and its views are initialized.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.disconnected">
+            <summary>
+            True if this Realtime instance is not connected or in an error state.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Realtime.clientID">
+            <summary>
+            The local clientID of this Realtime instance.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Connect(System.String,Normal.Realtime.RealtimeModel)">
+            <summary>
+            Connect to a room.
+            </summary>
+            <param name="roomName">The name of the room to connect to. All clients that connect to the same room name will end up on the same room server.</param>
+            <param name="roomModel">An optional RealtimeModel to use as the root model in the datastore.</param>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.Disconnect">
+            <summary>
+            Disconnect from a room.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Realtime.UnregisterSceneRealtimeView(Normal.Realtime.RealtimeView,System.Boolean)">
+            <summary>
+            Remove a scene view binding from this Realtime datastore.
+            </summary>
+            <param name="view">The view to unregister.</param>
+            <param name="isViewDestroyed">If true, the view model will not be replaced. Use this when the scene view is
+            being destroyed. Make sure the model is not used after being unregistered.</param>
+        </member>
+        <member name="T:Normal.Realtime.Datastore">
+             <summary>
+             The datastore for a Normcore Room.
+            
+             This class holds all models that belong to a room's datastore.
+             </summary>
+             <remarks>This class should never need to be used directly and will be marked internal in the next major version.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Datastore.roomModel">
+            <summary>The room model that was supplied to Realtime.Connect or Room.Connect.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Datastore.sceneViewModels">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Datastore.prefabViewModels">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="E:Normal.Realtime.Datastore.prefabRealtimeViewModelAdded">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="E:Normal.Realtime.Datastore.prefabRealtimeViewModelRemoved">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Datastore.Reset(Normal.Realtime.Room,Normal.Realtime.RealtimeModel)">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Datastore.GetSceneRealtimeViewModelForUUID(System.Byte[])">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="M:Normal.Realtime.Datastore.ConnectSceneRealtimeViewModel(System.String,Normal.Realtime.RealtimeViewModel,System.Action{System.Boolean,Normal.Realtime.RealtimeViewModel})">
+            <summary>Internal. Do not use.</summary>
+            <remarks>This will switch from public to internal in the next major version.</remarks>
+        </member>
+        <member name="T:Normal.Realtime.Room">
+            <summary>
+            Represents a room on the server. Manages the connection to the server and the datastore.
+            </summary>
+            <remarks>If you're using Realtime this class should rarely be used directly. Realtime will manage the Room object and it exposes equivalent methods for all Room operations.</remarks>
+        </member>
+        <member name="P:Normal.Realtime.Room.connectionState">
+            <summary>
+            The connection state of the room.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Room.connecting">
+            <summary>
+            True if the room is connecting to the server.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Room.connected">
+            <summary>
+            True if the room is connected to the server.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.Room.disconnected">
+            <summary>
+            True if the room is disconnected or in an error state.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.Utility.Extensions.Deconstruct``2(System.Collections.Generic.KeyValuePair{``0,``1},``0@,``1@)">
+            <summary>
+            Destructuring extension for KeyValuePair.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeExecutionOrder">
+            <summary>
+            A class that holds the constants for any script execution order settings within Normcore.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeExecutionOrder.RealtimeView">
+            <summary>
+            The script execution order that's automatically applied to RealtimeView.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeExecutionOrder.RealtimeTransform">
+            <summary>
+            The script execution order that's automatically applied to RealtimeTransform.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.ImmutableModelCollection">
+            <summary>
+            An immutable map of models indexed by unique property IDs.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.ImmutableModelCollection._modelDict">
+            <summary>
+            A map from property ID to RealtimeModel.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.ImmutableModelCollection._modelList">
+            <summary>
+            The same data as _modelDict, but flattened into an array for efficient writing.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.ImmutableModelCollection.FlattenModelDictionary(System.Collections.Generic.IReadOnlyDictionary{System.UInt32,Normal.Realtime.RealtimeModel})">
+            <summary>
+            Flatten the model map into a straight array of model/ID pairs.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.ImmutableModelCollection.Item(System.UInt32)">
+            <summary>
+            Get the RealtimeModel associated with a property ID.
+            </summary>
+            <param name="id">The property ID of the model.</param>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeView">
+            <summary>
+            A component that manages a set of RealtimeComponents on a game object.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView._sceneViewPreventOwnershipTakeover">
+            <summary>
+            If true, scene views will be created with the preventOwnershipTakeover lifetime flag.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView._sceneViewDestroyWhenLastClientLeaves">
+            <summary>
+            If true, scene views will be created with the destroyWhenLastClientLeaves lifetime flag.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView._components">
+            <summary>
+            Components serialized as a list of component/ID pairs. These are expanded into a dictionary when the view
+            is loaded. Deprecated component IDs are serialized with null components.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView._childViews">
+            <summary>
+            Child views serialized as a list of view/ID pairs. These are expanded into a dictionary when the view is
+            loaded. Deprecated view IDs are serialized with null views.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView._hierarchy">
+            <summary>
+            The cached view hierarchy.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.hierarchy">
+            <summary>
+            A lazily instantiated view hierarchy.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.IsParentView(Normal.Realtime.RealtimeView)">
+            <summary>
+            True if this view is the immediate parent of the specified view.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView.model">
+            <summary>
+            An internal model accessor so that Realtime can create and destroy view models on the datastore.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.viewUUID">
+            <summary>
+            The UUID of a RealtimeView instance. This is used to associate scene objects across clients and sessions.
+            For scene objects, it is pregenerated by the editor. For prefab objects, it is null. Any changes to it will
+            break persistence.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.GetRootView">
+            <summary>
+            Returns the root view of this view, or this view if it is the root.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.GetParentView">
+            <summary>
+            Returns the parent view of this view, or null if this is the root view.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isChildView">
+            <summary>
+            True if the view is a child view.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isRootView">
+            <summary>
+            True if the view is a root view (scene or prefab).
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isPrefabView">
+            <summary>
+            True if the view is part of a prefab view hierarchy.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isSceneView">
+            <summary>
+            True if the view is part of a scene view hierarchy.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isRootSceneView">
+            <summary>
+            True if the view is a root scene view.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isRootPrefabView">
+            <summary>
+            True if the view is a root prefab view.
+            </summary>
+        </member>
+        <member name="F:Normal.Realtime.RealtimeView.sceneViewWillRegisterWithRealtime">
+            <summary>
+            Called when a scene view is about to register with Realtime. Use this to return a different Realtime
+            instance than whatever was assigned in the scene, like on scene views that were additively loaded.
+            This should be set during Awake, and is called during Start.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.MigrateSceneViewUUIDType">
+            <summary>
+            Convert the legacy byte array UUIDs to the new string UUID field, if necessary.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.MigrateSceneViewLifetime">
+            <summary>
+            Convert the legacy scene view lifetime settings to the new lifetime settings.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.RebuildRealtimeGraph">
+            <summary>
+            Recursively rebuild the RealtimeView/RealtimeComponent graph, from this node downwards.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.FindNextUnusedComponentID(Normal.Realtime.IConfigurableComponentMap,System.UInt32@)">
+            <summary>
+            Increment the component ID until we find one not in the component map.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.FindRealtimeViewsInChildren(UnityEngine.Transform,System.Collections.Generic.List{Normal.Realtime.RealtimeView})">
+            <summary>
+            Recursively add RealtimeViews in transform children to a list. The recursion has variable depth; it will
+            terminate if it finds a RealtimeView, but continue if it doesn't. This will reach views that are nested
+            under un-networked transforms without adding another RealtimeViews children.
+            </summary>
+            <param name="transform">The transform parent to iterate.</param>
+            <param name="views">The list to add discovered views to. This will be allocated if it's excluded.</param>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.ResolveSceneViewRealtime">
+            <summary>
+            Decide which Realtime this view will use. This method is only applicable to root scene views.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.Normal#Realtime#IConfigurableComponent#CreateModel">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.Normal#Realtime#IConfigurableComponent#SetModel(Normal.Realtime.RealtimeModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.Normal#Realtime#IConfigurableComponent#SetView(Normal.Realtime.RealtimeView)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.realtimeView">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.realtime">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.room">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.ownerIDSelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.ownerIDInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isUnownedSelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isUnownedInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isOwnedLocallySelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isOwnedLocallyInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isOwnedRemotelySelf">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.isOwnedRemotelyInHierarchy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.RequestOwnership">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.SetOwnership(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.ClearOwnership">
+            <inheritdoc/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.preventOwnershipTakeover">
+            <inheritdoc cref="P:Normal.Realtime.RealtimeModel.preventOwnershipTakeover"/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.destroyWhenOwnerOrLastClientLeaves">
+            <inheritdoc cref="P:Normal.Realtime.RealtimeModel.destroyWhenOwnerOrLastClientLeaves"/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.destroyWhenLastClientLeaves">
+            <inheritdoc cref="P:Normal.Realtime.RealtimeModel.destroyWhenLastClientLeaves"/>
+        </member>
+        <member name="P:Normal.Realtime.RealtimeView.destroyWhenOwnerLeaves">
+            <inheritdoc cref="P:Normal.Realtime.RealtimeModel.destroyWhenOwnerLeaves"/>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.InstantiateViewPrefab(Normal.Realtime.RealtimeViewModel,Normal.Realtime.Realtime)">
+            <summary>
+            Instantiate a RealtimeView prefab.
+            </summary>
+            <param name="model">The root view model of the prefab.</param>
+            <param name="realtime">The Realtime instance instantiating the view.</param>
+            <returns>An instantiated RealtimeView ready to use.</returns>
+            <exception cref="T:System.Exception">Throws an exception if a prefab cannot be found for the provided model.</exception>
+            <exception cref="T:System.Exception">Throws an exception if the prefab does not have a RealtimeView component on the root transform.</exception>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.SetViewOnComponents(System.Boolean)">
+            <summary>
+            Recursively bind views to components in this view tree. This is a no-op if it has already run once, because
+            we don't support adding components to views at runtime.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.SetRealtime(Normal.Realtime.Realtime)">
+            <summary>
+            Recursively set the Realtime instance on this view and its child views. This is a no-op if the provided
+            instance is the same as the cached instance, as it assumes all of the children have the same cached
+            instance. If that is not the case, use SetRealtimeOnChildViews to bypass the cache no-op.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.SetRealtimeOnChildViews(Normal.Realtime.Realtime)">
+            <summary>
+            Recursively set the Realtime instance on the child views.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeView.BindModelsToComponentMap(Normal.Realtime.ImmutableModelCollection,Normal.Realtime.IConfigurableComponentMap)">
+            <summary>
+            Bind a map of models to a map of components using shared component IDs.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.RealtimeViewHierarchy">
+            <summary>
+            RealtimeViewHierarchy caches the view hierarchy in a fast and immutable structure.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeViewHierarchy.#ctor(Normal.Realtime.RealtimeView,Normal.Realtime.RealtimeViewMap)">
+            <summary>
+            Construct a new view hierarchy for a specific view.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeViewHierarchy.GetParentView(Normal.Realtime.RealtimeView)">
+            <summary>
+            Find the immediate parent view.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeViewHierarchy.IngestChildViewMap(Normal.Realtime.RealtimeViewMap)">
+            <summary>
+            Convert the child view map into a fast array of unindexed views.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.RealtimeViewModel.SetChildModels(Normal.Realtime.ImmutableModelCollection,Normal.Realtime.ImmutableModelCollection)">
+            <summary>
+            Set the child models (child view model and component model) on this view, and add them to the list of
+            child models in the superclass. If there are cached updates that need to be applied, apply them here.
+            </summary>
+        </member>
+        <member name="T:Normal.Realtime.IConfigurableComponentMap">
+            <summary>
+            The IConfigurableComponentMap interface lets us treat RealtimeView and RealtimeComponent dictionaries
+            the same way for operations where they can both be treated as components.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IConfigurableComponentMap.count">
+            <summary>
+            The number of elements in the map.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IConfigurableComponentMap.componentIDs">
+            <summary>
+            An enumerable list of component IDs.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IConfigurableComponentMap.components">
+            <summary>
+            An enumerable list of component values. Deprecated components will be null.
+            </summary>
+        </member>
+        <member name="P:Normal.Realtime.IConfigurableComponentMap.Item(System.UInt32)">
+            <summary>
+            Get a component under a specific component ID as an IConfigurableComponent.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IConfigurableComponentMap.ContainsComponentID(System.UInt32)">
+            <summary>
+            True if the component dictionary contains a specific component ID.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IConfigurableComponentMap.ContainsComponent(Normal.Realtime.IConfigurableComponent)">
+            <summary>
+            True if the component dictionary contains a specific component.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IConfigurableComponentMap.Add(System.UInt32,Normal.Realtime.IConfigurableComponent)">
+            <summary>
+            Add a component to the map.
+            </summary>
+        </member>
+        <member name="M:Normal.Realtime.IConfigurableComponentMap.Deprecate(System.UInt32)">
+            <summary>
+            Deprecate a component ID. The component ID will stay in the map, but the value will be null.
+            </summary>
+        </member>
+        <member name="T:Normal.NormcoreAppSettings">
+            <summary>
+            A ScriptableObject that represents all settings related to a single Normcore application.
+            </summary>
+            <remarks>
+            Most projects will use a single NormcoreAppSettings asset, but multiple can be created if you need to use multiple app keys, or you have development, staging, and production Normcore Private servers.
+            </remarks>
+        </member>
+        <member name="F:Normal.NormcoreAppSettings.DEFAULT_MATCHER_URL">
+            <summary>
+            The default matcher URL for Normcore servers.
+            </summary>
+            <remarks>
+            This is always the matcher URL you should use unless you're using Normcore Private.
+            </remarks>
+        </member>
+        <member name="P:Normal.NormcoreAppSettings.normcoreAppKey">
+            <summary>
+            The app key used to associate your application with the Normcore servers.
+            </summary>
+        </member>
+        <member name="P:Normal.NormcoreAppSettings.matcherURL">
+            <summary>
+            The matcher URL used to connect to Normcore servers. If you're using Normcore Private Cloud or On-Premises, make sure this
+            points to your Normcore Private matcher service.
+            </summary>
+        </member>
+        <member name="M:Normal.NormcoreAppSettings.CreateInstance(System.String,System.String)">
+            <summary>
+            Create a new app settings instance.
+            </summary>
+        </member>
+        <member name="T:Normal.NormcoreProjectSettings">
+            <summary>A ScriptableObject that represents all settings related to a Normcore project.</summary>
+            <remarks>These settings are applied project-wide, regardless of how many Normcore Apps this project connects to.</remarks>
+        </member>
+        <member name="P:Normal.NormcoreProjectSettings.logLevel">
+            <summary>The log level to use for all Normcore-related logging.</summary>
+            <remarks>Defaults to Error, which only logs errors. Set to Debug for more verbose logging.</remarks>
+        </member>
+        <member name="T:Normal.Utility.NormalLog">
+            <summary>
+            NormalLog wraps the UnityEngine log with conditionally compiled logging.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.capacity">
+            <summary>
+            The capacity of the buffer.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.count">
+            <summary>
+            The number of elements in the buffer.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.isEmpty">
+            <summary>
+            True if the buffer is empty.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.isFull">
+            <summary>
+            True if the buffer is full. Pushing onto the buffer will overwrite old elements.
+            </summary>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.front">
+            <summary>
+            Returns the newest element in the buffer. This is equivalent to calling buffer[0].
+            </summary>
+            <exception cref ="T:System.IndexOutOfRangeException">Thrown when the buffer is empty.</exception>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.back">
+            <summary>
+            Returns the oldest element in the buffer. This is equivalent to calling buffer[buffer.count - 1].
+            </summary>
+            <exception cref ="T:System.IndexOutOfRangeException">Thrown when the buffer is empty.</exception>
+        </member>
+        <member name="P:Normal.Utility.RingBuffer`1.next">
+            <summary>
+            Returns the next front of the buffer. If the buffer is not full, this object has been allocated but is not
+            considered "inside" the buffer. If the buffer is full, this returns the oldest element. The buffer is
+            allocated during construction, so calling `buffer.Enqueue(buffer.next)` will advance the ring without
+            allocating any new objects.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.RingBuffer`1.Enqueue(`0)">
+            <summary>
+            Add an element to the front of the buffer. If the buffer is full, this overwrites the back of the buffer.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.RingBuffer`1.Dequeue">
+            <summary>
+            Remove the element at the back of the buffer.
+            </summary>
+            <exception cref ="T:System.IndexOutOfRangeException">Thrown when the buffer is empty.</exception>
+        </member>
+        <member name="M:Normal.Utility.RingBuffer`1.DequeueFront">
+            <summary>
+            Remove the element at the front of the buffer.
+            </summary>
+            <exception cref ="T:System.IndexOutOfRangeException">Thrown when the buffer is empty.</exception>
+        </member>
+        <member name="M:Normal.Utility.TaskCoroutine.Wait(System.Threading.Tasks.Task)">
+            <summary>
+            Yield until the provided task is complete.
+            </summary>
+        </member>
+        <member name="M:Normal.Utility.Extensions.GetComponentInParent``1(UnityEngine.Component,System.Boolean)">
+            <summary>
+            Returns the first component of type T in this GameObject or any of its parents.
+            </summary>
+            <param name="includeInactive">If true, include inactive parents.</param>
+            <typeparam name="T">The type of Component to retrieve.</typeparam>
+            <returns>A component of the matching type, if found.</returns>
+        </member>
+        <member name="T:RealtimeModelAttribute">
+            <summary>
+            An attribute that's used to signal to the Realtime model compiler that a C# class should be treated as a model template.
+            </summary>
+        </member>
+        <member name="F:RealtimeModelAttribute.createMetaModel">
+            <summary>
+            Whether this model is configured to generate a metamodel.
+            </summary>
+        </member>
+        <member name="M:RealtimeModelAttribute.#ctor(System.Boolean)">
+            <summary>
+            Used to specify attributes about the model itself.
+            </summary>
+            <param name="createMetaModel">Whether or not to create a MetaModel which allows this model to support ownership and lifetime flags.</param>
+        </member>
+        <member name="T:RealtimePropertyAttribute">
+            <summary>
+            An attribute that's used to signal to the Realtime model compiler that a field should be compiled into a realtime property.
+            </summary>
+        </member>
+        <member name="M:RealtimePropertyAttribute.#ctor(System.UInt32,System.Boolean,System.Boolean)">
+            <summary>
+            Used to specify attributes about the property itself.
+            </summary>
+            <param name="propertyID">The propertyID to use. This only needs to be unique to this model and cannot be zero.</param>
+            <param name="reliable">Whether this property should be synchronized on the reliable or unreliable channel (primitive types only).</param>
+            <param name="createDidChangeEvent">Whether to create a propertyDidChange event during model compilation.</param>
+        </member>
+        <member name="T:RealtimeCallbackAttribute">
+            <summary>
+            An attribute that can be applied to an event on a RealtimeModel in order to get notifications when a model is serialized/deserialized.
+            </summary>
+            <remarks>
+            This API can be used to be notified after all properties have been updated on a model from a single packet:
+            [RealtimeCallback(RealtimeModelEvent.OnDidReadProperties)] public void OnDidRead(PropertyChangeSet changes) { ... }
+            </remarks>
+        </member>
+    </members>
+</doc>
