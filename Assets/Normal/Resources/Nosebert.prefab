@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935144029534439580}
   - component: {fileID: 935144029534439581}
-  - component: {fileID: 2953562677277370598}
+  - component: {fileID: 7001774671040529712}
   m_Layer: 0
   m_Name: Nosebert
   m_TagString: Untagged
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2953562677277370598
+--- !u!114 &7001774671040529712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,6 +238,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2420617290708987589}
+  - component: {fileID: -5773631112555553467}
+  - component: {fileID: -4406806566343480828}
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
@@ -259,6 +261,47 @@ Transform:
   m_Father: {fileID: 8652867051659854040}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5773631112555553467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578924688685198909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: -4406806566343480828}
+  _childViews: []
+--- !u!114 &-4406806566343480828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578924688685198909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
 --- !u!1 &5707473259884911075
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +311,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347493391517864725}
+  - component: {fileID: -7941435485696095300}
+  - component: {fileID: 4165871988843644594}
   m_Layer: 0
   m_Name: L
   m_TagString: Untagged
@@ -289,6 +334,47 @@ Transform:
   m_Father: {fileID: 8652867051659854040}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7941435485696095300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707473259884911075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 4165871988843644594}
+  _childViews: []
+--- !u!114 &4165871988843644594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707473259884911075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
 --- !u!1 &8481165784424695584
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +386,7 @@ GameObject:
   - component: {fileID: 8652867051659854040}
   - component: {fileID: 104740997662547702}
   - component: {fileID: -5900874287778244852}
+  - component: {fileID: 681552125685000788}
   m_Layer: 0
   m_Name: Nosebert
   m_TagString: Untagged
@@ -347,9 +434,17 @@ MonoBehaviour:
   _components:
   - componentID: 1
     component: {fileID: -5900874287778244852}
+  - componentID: 2
+    component: {fileID: 681552125685000788}
   _childViews:
   - viewID: 1
     view: {fileID: 2740421314633387010}
+  - viewID: 2
+    view: {fileID: 227253469347663703}
+  - viewID: 3
+    view: {fileID: -7941435485696095300}
+  - viewID: 4
+    view: {fileID: -5773631112555553467}
 --- !u!114 &-5900874287778244852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +460,24 @@ MonoBehaviour:
   _head: {fileID: 645371956090817369}
   _leftHand: {fileID: 1347493391517864725}
   _rightHand: {fileID: 2420617290708987589}
+--- !u!114 &681552125685000788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481165784424695584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
 --- !u!1 &8807753052472035612
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +487,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 645371956090817369}
+  - component: {fileID: 227253469347663703}
+  - component: {fileID: -2633470450504144912}
+  - component: {fileID: -8616867139963516824}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -395,3 +511,58 @@ Transform:
   m_Father: {fileID: 8652867051659854040}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227253469347663703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807753052472035612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: -2633470450504144912}
+  - componentID: 2
+    component: {fileID: -8616867139963516824}
+  _childViews: []
+--- !u!114 &-2633470450504144912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807753052472035612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
+--- !u!114 &-8616867139963516824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807753052472035612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4ff7916cbc1db4dae0b06d829ff79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

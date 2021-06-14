@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\LoginManager.cs" />
-    <Compile Include="Assets\Teleporter.cs" />
+    <Compile Include="Assets\Scripts\Teleporter.cs" />
     <Compile Include="Assets\Normal\Examples\Blank Scene Template\Scripts\OculusSetFloorTrackingOriginWithoutPlugin.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Normal\Examples\VR Player\Scripts\VoiceMouthMove.cs" />
@@ -63,10 +63,14 @@
     <Compile Include="Assets\FirstPersion AIO Pack\FirstPersonAIO\FirstPersonAIO.cs" />
     <Compile Include="Assets\Normal\Examples\Cube Player\Scripts\CubePlayerManager.cs" />
     <Compile Include="Assets\FirstPersion AIO Pack\DemoScene\MiscScripts\Doors.cs" />
-    <Compile Include="Assets\AvatarStorage.cs" />
+    <Compile Include="Assets\Scripts\AvatarStorage.cs" />
+    <Compile Include="Assets\Scripts\RoomInteraction.cs" />
+    <Compile Include="Assets\Scripts\ColorChanger.cs" />
     <Compile Include="Assets\Normal\Examples\Hoverbird Player\Scripts\HoverbirdPlayerManager.cs" />
     <Compile Include="Assets\Normal\Examples\Cube Player\Scripts\CubePlayer.cs" />
-    <Compile Include="Assets\ColorChanger.cs" />
+    <Compile Include="Assets\Scripts\UIpanelSwitch.cs" />
+    <Compile Include="Assets\Scripts\RoomSyncModel.cs" />
+    <Compile Include="Assets\Scripts\RoomSync.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -740,6 +744,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{2D24D73D-CC4A-CB2D-D3B9-92F24A55A6F0}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

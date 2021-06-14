@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7493641042548050899}
+  - component: {fileID: 4832756484422369716}
+  - component: {fileID: 6493364367080438054}
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
@@ -30,6 +32,47 @@ Transform:
   m_Father: {fileID: 2285967566308850294}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4832756484422369716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823786931774770693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 6493364367080438054}
+  _childViews: []
+--- !u!114 &6493364367080438054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823786931774770693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
 --- !u!1 &3745581070543667665
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +82,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6329818812086529195}
+  - component: {fileID: -2075373070209088941}
+  - component: {fileID: 2113913994023036216}
+  - component: {fileID: 2981358034363988982}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -60,6 +106,61 @@ Transform:
   m_Father: {fileID: 2285967566308850294}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2075373070209088941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745581070543667665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 2113913994023036216}
+  - componentID: 2
+    component: {fileID: 2981358034363988982}
+  _childViews: []
+--- !u!114 &2113913994023036216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745581070543667665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
+--- !u!114 &2981358034363988982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745581070543667665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4ff7916cbc1db4dae0b06d829ff79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4063767293285932035
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4063767293285932045}
   - component: {fileID: 4063767293285932034}
-  - component: {fileID: 4209661707532956233}
+  - component: {fileID: 455269801993485937}
   m_Layer: 0
   m_Name: Tooty
   m_TagString: Untagged
@@ -144,7 +245,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4209661707532956233
+--- !u!114 &455269801993485937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,6 +399,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4400264142360634897}
+  - component: {fileID: 1021717618050859809}
+  - component: {fileID: -1830241831279653384}
   m_Layer: 0
   m_Name: L
   m_TagString: Untagged
@@ -319,6 +422,47 @@ Transform:
   m_Father: {fileID: 2285967566308850294}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1021717618050859809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867815754714710139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: -1830241831279653384}
+  _childViews: []
+--- !u!114 &-1830241831279653384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867815754714710139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 0
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
 --- !u!1 &7598101746907277636
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +474,7 @@ GameObject:
   - component: {fileID: 2285967566308850294}
   - component: {fileID: -8793150614499637734}
   - component: {fileID: -4912165543329745466}
+  - component: {fileID: 2599813621778054412}
   m_Layer: 0
   m_Name: Tooty
   m_TagString: Untagged
@@ -377,9 +522,17 @@ MonoBehaviour:
   _components:
   - componentID: 1
     component: {fileID: -4912165543329745466}
+  - componentID: 2
+    component: {fileID: 2599813621778054412}
   _childViews:
   - viewID: 1
     view: {fileID: 2332323393255416074}
+  - viewID: 2
+    view: {fileID: -2075373070209088941}
+  - viewID: 3
+    view: {fileID: 1021717618050859809}
+  - viewID: 4
+    view: {fileID: 4832756484422369716}
 --- !u!114 &-4912165543329745466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,3 +548,21 @@ MonoBehaviour:
   _head: {fileID: 6329818812086529195}
   _leftHand: {fileID: 4400264142360634897}
   _rightHand: {fileID: 7493641042548050899}
+--- !u!114 &2599813621778054412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7598101746907277636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0

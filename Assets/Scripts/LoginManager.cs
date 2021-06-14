@@ -11,6 +11,7 @@ public class LoginManager : MonoBehaviour
     public string roomName = "";
     public Realtime realtime;
     public TMP_InputField roomNameInput;
+    public GameObject loginPanel;
 
     public void SetRoomName()
     {
@@ -23,6 +24,7 @@ public class LoginManager : MonoBehaviour
         if (roomNameSet)
         {
             realtime.Connect(roomName);
+            Destroy(loginPanel);
         }
     }
 }
